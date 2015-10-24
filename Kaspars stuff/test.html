@@ -1,13 +1,177 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<title>stuff</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Waypoints in directions</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        float: left;
+        width: 70%;
+        height: 100%;
+      }
+#right-panel {
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#right-panel select, #right-panel input {
+  font-size: 15px;
+}
+
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+
+      #right-panel {
+        margin: 20px;
+        border-width: 2px;
+        width: 20%;
+        float: left;
+        text-align: left;
+        padding-top: 20px;
+      }
+      #directions-panel {
+        margin-top: 20px;
+        background-color: #FFEE77;
+        padding: 10px;
+      }
+    </style>
   </head>
   <body>
-  <script src='FunctionOfMidpoints.js' type='text/javascript'></script> 
-  <script type='text/javascript'>
+    <div id="map"></div>
+    <div id="right-panel">
+    <div>
+    <b>Start:</b>
+    <select id="start">
+      <option value="Manchester">Manchester</option>
+      <option value="Boston, MA">Boston, MA</option>
+      <option value="New York, NY">New York, NY</option>
+      <option value="Miami, FL">Miami, FL</option>
+    </select>
+    <br>
+    <b>Waypoints:</b> <br>
+    <i>(Ctrl-Click for multiple selection)</i> <br>
+    <select multiple id="waypoints">
+      <option value="Arndale Market">Arndale Market</option>
+      <option value="University of Manchester">University of Manchester</option>
+      <option value="chicago, il">Chicago</option>
+      <option value="winnipeg, mb">Winnipeg</option>
+      <option value="fargo, nd">Fargo</option>
+      <option value="calgary, ab">Calgary</option>
+      <option value="spokane, wa">Spokane</option>
+    </select>
+    <br>
+    <b>End:</b>
+    <select id="end">
+      <option value="Fallowfield, Manchester">Fallowfield, Manchester</option>
+      <option value="Seattle, WA">Seattle, WA</option>
+      <option value="San Francisco, CA">San Francisco, CA</option>
+      <option value="Los Angeles, CA">Los Angeles, CA</option>
+    </select>
+    <br>
+      <input type="submit" id="submit">
+    </div>
+    <div id="directions-panel"></div>
+    </div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="FunctionOfMidpoints.js"></script>
+	<script src="police.js"></script>
+    <script>
+	var directionsDisplayDangerous;
+    var directionsDisplayFastest;
+	
+function initMap() {
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } });
+  directionsDisplayFastest = new google.maps.DirectionsRenderer();
+  directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } });
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 6,
+    center: {lat: 41.85, lng: -87.65}
+  });
+  directionsDisplay.setMap(map);
+  directionsDisplayFastest.setMap(map);
+  directionsDisplayDangerous.setMap(map);
 
-  console.log(functionToGetMidpoints([[53.1201267, -2.1201237],[53.2303523, -2.3056789],[53.2675918, -2.2658356]]));
-	</script>
+  document.getElementById('submit').addEventListener('click', function() {
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  });
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+  var waypts = [];
+  var checkboxArray = document.getElementById('waypoints');
+  for (var i = 0; i < checkboxArray.length; i++) {
+    if (checkboxArray.options[i].selected) {
+      waypts.push({
+        location: checkboxArray[i].value,
+        stopover: true
+      });
+    }
+  }
+
+  directionsService.route({
+    origin: document.getElementById('start').value,
+    destination: document.getElementById('end').value,
+    waypoints: waypts,
+    optimizeWaypoints: true,
+    travelMode: google.maps.TravelMode.WALKING,
+	provideRouteAlternatives: true
+  }, function(result, status) {
+    if (status === google.maps.DirectionsStatus.OK) {
+      var routes = result.routes;
+      var arrayOfRoutes = [];
+	  console.log(routes.length)
+	  
+                for(var i = 0; i < routes.length; i++){
+				  var steps = [];
+				  console.log(routes[i].legs.length);
+				  for (var j = 0; j<routes[i].legs.length; j++){
+					console.log(routes[i].legs[j].steps)
+					steps = steps.concat(routes[i].legs[j].steps);
+				  }
+				  console.log(arrayOfRoutes,steps)
+                  var coordinates = [];
+                  coordinates[0] = [steps[0].start_location.lat(),steps[0].start_location.lng()];
+                  for (var j = 0; j < steps.length; j++){
+                    coordinates[j+1] = [steps[j].end_location.lat(),steps[j].end_location.lng()]
+                  }
+                  var midpoints = functionToGetMidpoints(coordinates);
+                  arrayOfRoutes[i] = midpoints;
+                }
+				
+                getSafestRoute(arrayOfRoutes, 1, function(ways){
+                  console.log(ways);
+                  directionsDisplay.setDirections(result);
+                  directionsDisplay.setOptions({routeIndex:ways.safest});
+                  directionsDisplayDangerous.setDirections(result);
+                  directionsDisplayDangerous.setOptions({routeIndex:ways.dangerous});
+                  var travelTimes = [];
+                  for (var i = 0; i < routes.length; i++){
+                    travelTimes[i] = routes[i].legs[0].duration.value;
+                  }
+                  directionsDisplayFastest.setDirections(result);
+                  directionsDisplayFastest.setOptions({routeIndex:min(travelTimes)});
+				  console.log(crimesNumbers);
+                })
+            }
+  });
+}
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjKhNNY3LsJTVCFD2J7UrGtSQyIN4r5k&callback=initMap" ></script>
+        
   </body>
 </html>
