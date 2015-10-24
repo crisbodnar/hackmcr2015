@@ -16,6 +16,7 @@
         longitude = position.coords.longitude;
         x.innerHTML = "Latitude: " + latitude +
             "<br>Longitude: " + longitude;
+        console.log("Works here!");
         initMap();
     }
     function initMap() {
@@ -33,5 +34,57 @@
             title: 'You are here!!!'
         });
     }
-    getLocation();
+
+    /////////////////////////////////
+    ///* Here is the Direction Service
+
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var directionsMap;
+
+    var z = document.getElementById("coordinates");
+    function getDirectionsLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showDirectionsPosition);
+        } else {
+            z.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showDirectionsPosition(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        z.innerHTML = "Latitude: " + latitude +
+            "<br>Longitude: " + longitude;
+        console.log("Works here!");
+        //initDirections();
+    }
+
+    function initDirections() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var start = new google.maps.LatLng(latitude, longitude);
+        var mapOptions = {
+            zoom:7,
+            center: start
+        }
+        directionsMap = new google.maps.Map(document.getElementById("directionsmap"), mapOptions);
+        directionsDisplay.setMap(directionsMap);
+        calcRoute();
+    }
+
+    function calcRoute() {
+        var start = new google.maps.LatLng(latitude, longitude);
+        var end = "london, uk";
+        var request = {
+            origin:start,
+            destination:end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(result);
+            }
+        });
+    }
+
+    //getDirectionsLocation();
 })();
