@@ -11,7 +11,7 @@
 		<br> <br>
 		<pre>		Starting location  <input title="text" id = "start-location" class="startinglocation">
 
-    		<input type="checkbox" id="current-location" name="usehere" onclick="FillBilling(this.form)"> <em>Check this box if the address is here</em>
+    		<input type="checkbox" id="current-location-checkbox" name="usehere"> <em>Check this box if the address is here</em>
 
 		Destination  <input title="text" id="end-location" class="destination">
 
@@ -27,7 +27,7 @@
 		</pre>
 	</div>
 	<div class= "jumbotron">
-		<h1> Long/lat for current location: </h1> 
+		<h1> Long/lat for current location: </h1>
     	<div id="coordinates"></div>
     </div>
     	<div id="map"></div></div>
@@ -35,6 +35,6 @@
 		<script src="FunctionOfMidpoints.js"></script>
 		<script src="police.js"></script>
 		<script src="map-script.js"></script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjKhNNY3LsJTVCFD2J7UrGtSQyIN4r5k&callback=getLocation"></script>	
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjKhNNY3LsJTVCFD2J7UrGtSQyIN4r5k&callback=getLocation"></script>
 </body>
 </html>
