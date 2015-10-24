@@ -1,22 +1,57 @@
-
-
-h5 {
-	color: white;
-}
-
-.main .col-md-4 img{
-	height: 700px;
-
-}
-
-.
-.button p{
-	font-size: 20px;
-	color: white;
-}
-
-.button {
+body {
 	background-color: black;
-	height: 200px;
-	width: 100px;
+}
+
+.nav a {
+  margin-top: 0;
+  color: #5a5a5a;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 16px;
+  text-decoration: none;
+  position: relative;
+
+
+}
+
+
+
+.nav {
+  background-color: white;
+  padding:0;
+  height: 60px;
+  position: relative;
+
+}
+
+.jumbotron {
+  background-image:url('background.jpg');
+  height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.nav li {
+  height: 60px;
+  float: left;
+  border-top: 10px;
+  display: inline-block;
+  padding: 20px;
+  width: 1200px;
+
+  text-align: center;
+}
+
+.nav li:hover {
+  cursor: pointer;
+}
+
+.nav {
+  
+  transition : 0.5s background;
+}
+
+.nav:hover {
+  background-color: teal;
+  cursor: pointer;
 }
