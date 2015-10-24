@@ -28,16 +28,161 @@
     }
     function initMap() {
         console.log("Display map");
-        directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } });
+        directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00", thickness: 50 } });
         directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } });
         directionsDisplayFastest = new google.maps.DirectionsRenderer();
 
         // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: latitude, lng: longitude},
-            scrollwheel: false,
-            zoom: 12
-        });
+		var styles = [
+			{
+				"featureType": "all",
+				"elementType": "labels.text.fill",
+				"stylers": [
+					{
+						"color": "#ffffff"
+					}
+				]
+			},
+			{
+				"featureType": "all",
+				"elementType": "labels.text.stroke",
+				"stylers": [
+					{
+						"color": "#000000"
+					},
+					{
+						"lightness": 13
+					}
+				]
+			},
+			{
+				"featureType": "administrative",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"color": "#000000"
+					}
+				]
+			},
+			{
+				"featureType": "administrative",
+				"elementType": "geometry.stroke",
+				"stylers": [
+					{
+						"color": "#144b53"
+					},
+					{
+						"lightness": 14
+					},
+					{
+						"weight": 1.4
+					}
+				]
+			},
+			{
+				"featureType": "landscape",
+				"elementType": "all",
+				"stylers": [
+					{
+						"color": "#08304b"
+					}
+				]
+			},
+			{
+				"featureType": "poi",
+				"elementType": "geometry",
+				"stylers": [
+					{
+						"color": "#0c4152"
+					},
+					{
+						"lightness": 5
+					}
+				]
+			},
+			{
+				"featureType": "road.highway",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"color": "#999999"
+					}
+				]
+			},
+			{
+				"featureType": "road.highway",
+				"elementType": "geometry.stroke",
+				"stylers": [
+					{
+						"color": "#A0A0A0"
+					},
+					{
+						"lightness": 25
+					}
+				]
+			},
+			{
+				"featureType": "road.arterial",
+				"elementType": "geometry.fill",
+				"stylers": [
+					{
+						"color": "#999999"
+					}
+				]
+			},
+			{
+				"featureType": "road.arterial",
+				"elementType": "geometry.stroke",
+				"stylers": [
+					{
+						"color": "#959595"
+					},
+					{
+						"lightness": 16
+					}
+				]
+			},
+			{
+				"featureType": "road.local",
+				"elementType": "geometry",
+				"stylers": [
+					{
+						"color": "#111111"
+					}
+				]
+			},
+			{
+				"featureType": "transit",
+				"elementType": "all",
+				"stylers": [
+					{
+						"color": "#146474"
+					}
+				]
+			},
+			{
+				"featureType": "water",
+				"elementType": "all",
+				"stylers": [
+					{
+						"color": "#021019"
+					}
+				]
+			}
+		]
+		var styledMap = new google.maps.StyledMapType(styles,
+			{name: "Styled Map"});
+		var mapOptions = {
+			zoom: 12,
+			center: {lat: latitude, lng: longitude},
+			mapTypeControlOptions: {
+				mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+			}
+		};
+        var map = new google.maps.Map(document.getElementById('map'),
+			mapOptions);
+		map.mapTypes.set('map_style', styledMap);
+		map.setMapTypeId('map_style');
         google.maps.event.trigger(map, 'resize');
         directionsDisplay.setMap(map);
         directionsDisplayFastest.setMap(map);
