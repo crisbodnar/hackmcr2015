@@ -82,6 +82,7 @@
                   for (var i = 0; i < routes.length; i++){
                     travelTimes[i] = routes[i].legs[0].duration.value;
                   }
+                  approximateTime = Math.round((travelTimes[0] + travelTimes[1] + travelTimes[2])/3/60);
                   directionsDisplayFastest.setDirections(result);
                   directionsDisplayFastest.setOptions({routeIndex:min(travelTimes)});
                 })
@@ -115,5 +116,3 @@ $('#current-location-checkbox').change(function() {
         $('#starting-text').show();
     }
 });
-
-

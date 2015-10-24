@@ -8,6 +8,8 @@
 //   console.log(data);
 // });
 
+var approximateTime = 0;
+
 function getSafestRoute(array,months,callback)
 {
   var resultArray = [];
