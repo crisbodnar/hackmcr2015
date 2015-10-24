@@ -20,11 +20,17 @@
     }
     function initMap() {
         console.log("Display map");
+
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: latitude, lng: longitude},
             scrollwheel: false,
             zoom: 12
+        });
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(latitude, longitude),
+            map: map,
+            title: 'You are here!!!'
         });
     }
     getLocation();
