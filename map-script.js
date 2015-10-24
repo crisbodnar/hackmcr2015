@@ -89,9 +89,11 @@
         });
     }
 
+
+//Submit button event
 $( "#submit-button" ).click(function() {
     var RouteArray = {};
-    var currentLocation = document.getElementById("current-location");
+    var currentLocation = document.getElementById("current-location-checkbox");
     if(currentLocation.checked)
         RouteArray['startPoint'] = new google.maps.LatLng(latitude, longitude);
     else
@@ -99,6 +101,18 @@ $( "#submit-button" ).click(function() {
     RouteArray["endPoint"] = document.getElementById("end-location").value;
     console.log(RouteArray["startPoint"]);
     calcRoute(RouteArray);
+});
+
+//Checkbox change event
+$('#current-location-checkbox').change(function() {
+    if($(this).is(":checked")) {
+        $('#start-location').hide();
+        $('#destination-text').hide();
+    }
+    else {
+        $('#start-location').show();
+        $('#destination-text').show();
+    }
 });
 
 
