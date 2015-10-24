@@ -11,6 +11,7 @@
 function getSafestRoute(array,months,callback)
 {
   var resultArray = [];
+  var result = {}
   for (var i = 0; i<array.length; i++)
   {
     getRouteSafeness(array[i],months,i,function(data,routeNumber){
@@ -23,7 +24,9 @@ function getSafestRoute(array,months,callback)
   {
     if(resultArray.length == array.length)
     {
-      callback(min(resultArray));
+      result.safest = min(resultArray);
+      result.dangerous = max(resultArray);
+      callback(result);
     }
   }
 }
@@ -35,6 +38,21 @@ function min(array){
   for (var i = 1; i<array.length; i++){
     // console.log(i,array[i]);
     if(array[i] < resultValue)
+    {
+      result = i;
+      resultValue = array[i];
+    }
+  }
+  return result;
+}
+
+function max(array){
+  var result = 0;
+  var resultValue = array[0];
+  // console.log(0,resultValue);
+  for (var i = 1; i<array.length; i++){
+    // console.log(i,array[i]);
+    if(array[i] > resultValue)
     {
       result = i;
       resultValue = array[i];
