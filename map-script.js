@@ -3,7 +3,7 @@
  */
     var latitude, longitude;
     var ourGoogle;
-	var marker
+	var ourMarker;
     var directionsDisplay;//safest
     var directionsDisplayDangerous;
     var directionsDisplayFastest;
@@ -42,19 +42,19 @@
         directionsDisplay.setMap(map);
         directionsDisplayFastest.setMap(map);
         directionsDisplayDangerous.setMap(map);
-        marker = new google.maps.Marker({
+        ourMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map,
 			animation: google.maps.Animation.DROP,
             title: 'You are here!!!'
         });
-		marker.addListener('click', toggleBounce);
+		ourMarker.addListener('click', toggleBounce);
     }
 	function toggleBounce() {
-		if (marker.getAnimation() !== null) {
-			marker.setAnimation(null);
+		if (ourMarker.getAnimation() !== null) {
+			ourMarker.setAnimation(null);
 		} else {
-			marker.setAnimation(google.maps.Animation.BOUNCE);
+			ourMarker.setAnimation(google.maps.Animation.BOUNCE);
 		}
 	}
     function calcRoute(Route) {
