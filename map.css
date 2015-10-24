@@ -1,12 +1,101 @@
-.container {
-	width:300px;
+/*///////////////////////////////////////
+Reset css */
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+////////////////////////////// 
+End reset CSS */
+
+html, body { 
+    height: 100%; margin: 0; padding: 0; 
+	font-family: Arial,sans-serif;
+}
+
+
+#container{
+	width: 100%;
+	height: 100%;
 	clear: both;
 }
-.container input{
+
+#menu{
+	color: white;
+	width: 20%;
+	height: 100%;
+	float:left;
+    z-index: 1000;
+    background: #0FA3CE;
+}
+
+#map {
+	z-index: 10;
+	float: left;
+	width: 80%;
+	height: 100%;
+}
+
+#menu-container{
+	width: 90%;
+	margin: 0 auto;
+}
+
+input[type="text"]{
+	box-sizing: border-box;
+	font-size: 16px;
+	font-weight: 300px;
+	height: 30px;
+	box-shadow: none;
+	background-color: white;
+	border: none;
+	border-radius: 2px;
+	margin: 10px 0;
+	width: 100%;
+	padding: 5px;
+	color: #9e9e9e;
+}
+
+input[type="checkbox"]{
+	border: none;
+	border-radius: 2px;
+	
+}
+
+input[type="submit"]{
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	height: 30px;
+	box-shadow: none;
+	background: #0ACE6C;
+	border: none;
+	border-radius: 2px;
+	margin: 10px 0;
 	width: 100%;
 }
 
-
-.coordinates {
-	color: red;
+h1{
+	text-transform: uppercase;
 }
+
