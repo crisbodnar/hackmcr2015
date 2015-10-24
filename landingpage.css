@@ -1,7 +1,22 @@
-body {
-	background-color: black;
-}
+
 
 h5 {
 	color: white;
+}
+
+.main .col-md-4 img{
+	height: 700px;
+
+}
+
+.
+.button p{
+	font-size: 20px;
+	color: white;
+}
+
+.button {
+	background-color: black;
+	height: 200px;
+	width: 100px;
 }
