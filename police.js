@@ -8,6 +8,7 @@
 //   console.log(data);
 // });
 
+var crimesPerRoad = {};
 var crimesNumbers = [];
 var approximateTime = 0;
 
