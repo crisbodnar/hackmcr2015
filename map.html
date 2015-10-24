@@ -7,7 +7,16 @@
 	<link rel="stylesheet" href="maps-api.css">
 </head>
 <body>
-	<h5> Works !</h5>
+	<div class= "container">
+		Starting location<input title="text" class="startinglocation">
+    	<input type="checkbox" name="usehere" onclick="FillBilling(this.form)">
+		<em>Check this box if the address is here</em><br>
+		Destination<input title="text" class="destination">
+		<br>
+		How many months to check for crimes <input title="text" class="howmany">
+		<br>
+		<input type= "submit" >
+	</div>
     <div id="coordinates"></div>
     <div id="map"></div>
 
@@ -18,5 +27,8 @@
 	<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjKhNNY3LsJTVCFD2J7UrGtSQyIN4r5k&callback=initMap">
 	</script>
+
+
+	
 </body>
 </html>

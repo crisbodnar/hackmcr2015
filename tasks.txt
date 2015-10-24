@@ -21,3 +21,11 @@ How to make the project in steps :
 - show the map
 - begining and destination
 - how safe you are at the moment
+
+
+
+form : 
+
+- starting location check box for here
+- target location 
+- input accuracy nr of months (optional)
