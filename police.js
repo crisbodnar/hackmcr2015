@@ -8,6 +8,7 @@
 //   console.log(data);
 // });
 
+var crimesNumbers = [];
 var approximateTime = 0;
 
 function getSafestRoute(array,months,callback)
@@ -26,6 +27,7 @@ function getSafestRoute(array,months,callback)
   {
     if(resultArray.length == array.length)
     {
+      crimesNumbers = resultArray;
       result.safest = min(resultArray);
       result.dangerous = max(resultArray);
       callback(result);
