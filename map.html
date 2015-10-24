@@ -9,13 +9,15 @@
 <body>
 	<div class= "container">
 		<br> <br>
-		<pre>		Starting location  <input title="text" id = "start-location" class="startinglocation">
+		<pre>		
+			<input type="checkbox" id="current-location-checkbox" name="usehere"> <em>Check this box if the address is here</em>
 
-    		<input type="checkbox" id="current-location-checkbox" name="usehere"> <em>Check this box if the address is here</em>
+			<span id="starting-text">Starting location</span>  <input title="text" id = "start-location" class="startinglocation">
 
-		Destination  <input title="text" id="end-location" class="destination">
 
-		How many months to check for crimes <input title="text" class="howmany">
+		<span>Destination</span>  <input title="text" id="end-location" class="destination">
+
+		How many months to check for crimes <input title="text" id="nrmonths" class="howmany">
 
 		<input type= "submit" id="submit-button">
 

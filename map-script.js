@@ -72,7 +72,7 @@
                   var midpoints = functionToGetMidpoints(coordinates);
                   arrayOfRoutes[i] = midpoints;
                 }
-                getSafestRoute(arrayOfRoutes,1,function(ways){
+                getSafestRoute(arrayOfRoutes, Route['dataMonths'], function(ways){
                   console.log(ways);
                   directionsDisplay.setDirections(result);
                   directionsDisplay.setOptions({routeIndex:ways.safest});
@@ -99,6 +99,7 @@ $( "#submit-button" ).click(function() {
     else
         RouteArray["startPoint"] = document.getElementById("start-location").value;
     RouteArray["endPoint"] = document.getElementById("end-location").value;
+    RouteArray['dataMonths'] = document.getElementById('nrmonths').value;
     console.log(RouteArray["startPoint"]);
     calcRoute(RouteArray);
 });
@@ -107,11 +108,11 @@ $( "#submit-button" ).click(function() {
 $('#current-location-checkbox').change(function() {
     if($(this).is(":checked")) {
         $('#start-location').hide();
-        $('#destination-text').hide();
+        $('#starting-text').hide();
     }
     else {
         $('#start-location').show();
-        $('#destination-text').show();
+        $('#starting-text').show();
     }
 });
 
