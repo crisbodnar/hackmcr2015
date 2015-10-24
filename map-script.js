@@ -96,6 +96,7 @@
                   crimesPerRoad.safest = Math.round(crimesNumbers[ways.safest]);
                   crimesPerRoad.dangerous = Math.round(crimesNumbers[ways.dangerous]);
                   crimesPerRoad.fastest = Math.round(crimesNumbers[min(travelTimes)]);
+                  showData();
                 })
             }
         });
@@ -115,6 +116,16 @@ $( "#submit-button" ).click(function() {
     console.log(RouteArray["startPoint"]);
     calcRoute(RouteArray);
 });
+
+function showData(){
+    $('#data').show();
+    var dataDiv = document.getElementById("safest-route-data");
+    dataDiv.innerHTML = crimesPerRoad.safest;
+    var dataDiv = document.getElementById("fastest-route-data");
+    dataDiv.innerHTML = crimesPerRoad.fastest;
+    var dataDiv = document.getElementById("dangerous-route-data");
+    dataDiv.innerHTML = crimesPerRoad.dangerous;
+}
 
 //Checkbox change event
 $('#current-location-checkbox').change(function() {
