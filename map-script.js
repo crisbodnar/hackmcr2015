@@ -1,10 +1,13 @@
 /**
  * Created by Cristi on 24-Oct-15.
  */
-(function () {
+// (function () {
     var x = document.getElementById("coordinates");
     var latitude, longitude;
+    var ourGoogle;
+    // getLocation();
     function getLocation() {
+        ourGoogle = google;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else {
@@ -39,11 +42,13 @@
     ///* Here is the Direction Service
 
     var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
+    var directionsService;
     var directionsMap;
 
     var z = document.getElementById("coordinates");
     function getDirectionsLocation() {
+        ourGoogle = google;
+        directionsService = new ourGoogle.maps.DirectionsService();
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showDirectionsPosition);
         } else {
@@ -56,7 +61,7 @@
         z.innerHTML = "Latitude: " + latitude +
             "<br>Longitude: " + longitude;
         console.log("Works here!");
-        //initDirections();
+        initDirections();
     }
 
     function initDirections() {
@@ -72,11 +77,11 @@
     }
 
     function calcRoute() {
-        var start = new google.maps.LatLng(latitude, longitude);
-        var end = "london, uk";
+        var _start = new google.maps.LatLng(latitude, longitude);
+        var _end = "Manchester, uk";
         var request = {
-            origin:start,
-            destination:end,
+            origin:_start,
+            destination:_end,
             travelMode: google.maps.TravelMode.DRIVING
         };
         directionsService.route(request, function(result, status) {
@@ -87,4 +92,4 @@
     }
 
     //getDirectionsLocation();
-})();
+// })();
