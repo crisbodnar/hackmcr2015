@@ -1,4 +1,4 @@
-function sendsms(number, message) {
+function sendsms(number) {
 message = "hell";
 key = '6575b7a0c97c835c2125b5a59d4ad50da6f665d5';
 $.ajax({
