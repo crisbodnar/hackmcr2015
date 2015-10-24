@@ -1,7 +1,6 @@
 body {
-	background-color: white;
+	margin: 0;
 }
-
 .nav a {
   margin-top: 0;
   color: #5a5a5a;
@@ -16,8 +15,9 @@ body {
 
 
 
+
 .nav {
-  background-color: white;
+	color: transparent;
   padding:0;
   height: 60px;
   position: relative;
@@ -26,9 +26,10 @@ body {
 
 .jumbotron {
   background-image:url('background.jpg');
-  height: 600px;
+  height: 900px;
   background-repeat: no-repeat;
   background-size: cover;
+  padding:0;
 }
 
 .nav li {
@@ -38,7 +39,7 @@ body {
   display: inline-block;
   padding: 20px;
   width: 1200px;
-
+  font-family: sans-serif;
   text-align: center;
 }
 
@@ -46,12 +47,16 @@ body {
   cursor: pointer;
 }
 
+.container {
+	margin:0;
+	padding: 0;
+}
 .nav {
   
   transition : 0.5s background;
 }
 
 .nav:hover {
-  background-color: teal;
+  background-color: #E6E6E6;
   cursor: pointer;
 }
