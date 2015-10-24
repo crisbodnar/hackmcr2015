@@ -62,4 +62,5 @@ html,body {
 .nav:hover {
   background-color: #E6E6E6;
   cursor: pointer;
+  opacity: 0.9;
 }
