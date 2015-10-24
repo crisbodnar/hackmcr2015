@@ -1,25 +1,63 @@
 //Police API stuff
-getRouteSafeness([[53.4564714,-2.225529],[53.4558641,-2.225356]],12,function(data){
-  console.log(data);
-});
+// var array = [
+//   [[53.4556949,-2.2253926],[53.4584239,-2.2274756],[53.4617181,-2.2302911]],
+//   [[53.4564714,-2.225529],[53.4558641,-2.225356]],
+// ];
+//
+// getSafestRoute(array,12,function(data){
+//   console.log(data);
+// });
+
+function getSafestRoute(array,months,callback)
+{
+  var resultArray = [];
+  for (var i = 0; i<array.length; i++)
+  {
+    getRouteSafeness(array[i],months,i,function(data,routeNumber){
+      resultArray[routeNumber] = data;
+      // console.log(resultArray);
+      tryCallback();
+    });
+  }
+  var tryCallback = function()
+  {
+    if(resultArray.length == array.length)
+    {
+      callback(min(resultArray));
+    }
+  }
+}
+
+function min(array){
+  var result = 0;
+  var resultValue = array[0];
+  // console.log(0,resultValue);
+  for (var i = 1; i<array.length; i++){
+    // console.log(i,array[i]);
+    if(array[i] < resultValue)
+    {
+      result = i;
+      resultValue = array[i];
+    }
+  }
+  return result;
+}
 
 function formatDate(date)
 {
   return (date.getYear()+1900)+'-'+(date.getMonth()+1<10?'0':'')+(date.getMonth()+1);
 }
 
-function getRouteSafeness(array,months,callback)
+function getRouteSafeness(array,months,routeNumber,callback)
 {
   var date = new Date("2015-08");
   var currentDate = date;
   var count = 0;
   var crimes = 0;
-  console.log(months);
   for (var i = 0; i<array.length; i++)
   {
     for (var j = 0; j<months; j++)
     {
-      console.log(currentDate);
       $.ajax({
         url: 'https://data.police.uk/api/crimes-at-location',
         type: 'POST',
@@ -27,7 +65,6 @@ function getRouteSafeness(array,months,callback)
         success: function(data) {
           crimes += data.length;
           count++;
-          console.log(data);
           tryCallback();
         }
       });
@@ -38,7 +75,8 @@ function getRouteSafeness(array,months,callback)
   {
     if(count == (array.length*months))
     {
-      callback(crimes);
+      // console.log(routeNumber,crimes,crimes/array.length);
+      callback(crimes/array.length,routeNumber);
     }
   }
 }
