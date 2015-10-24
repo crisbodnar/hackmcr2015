@@ -1,7 +1,6 @@
 /**
  * Created by Cristi on 24-Oct-15.
  */
-// (function () {
     var x = document.getElementById("coordinates");
     var latitude, longitude;
     var ourGoogle;
@@ -44,9 +43,9 @@
         });
     }
 
-    function calcRoute() {
-        var _start = new google.maps.LatLng(latitude, longitude);
-        var _end = "Manchester, uk";
+    function calcRoute(Route) {
+        var _start = Route["startPoint"];
+        var _end = Route["endPoint"];
         var request = {
             origin:_start,
             destination:_end,
@@ -75,3 +74,17 @@
             }
         });
     }
+
+$( "#submit-button" ).click(function() {
+    var RouteArray = {};
+    var currentLocation = document.getElementById("current-location");
+    if(currentLocation.checked)
+        RouteArray['startPoint'] = new google.maps.LatLng(latitude, longitude);
+    else
+        RouteArray["startPoint"] = document.getElementById("start-location").value;
+    RouteArray["endPoint"] = document.getElementById("end-location").value;
+    console.log(RouteArray["startPoint"]);
+    calcRoute(RouteArray);
+});
+
+
