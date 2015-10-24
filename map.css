@@ -104,6 +104,17 @@ h1{
 	display: none;
 }
 
+#required-time{
+	margin-top: 20px;
+	clear: both;
+	display: none;
+}
+
+#required-time p{
+	padding-top: 20px;
+	margin-top: 20px;
+}
+
 input[type="submit"]:hover{
 	background-color: #4cae4c;
     -webkit-transition: background-color 500ms linear;
