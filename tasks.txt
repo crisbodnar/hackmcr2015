@@ -2,6 +2,7 @@ Tasks :
 
 Kasper: 
 - algorithm for the best road
+- how to link the apis
 
 Cristi: 
 - google maps api
