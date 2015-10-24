@@ -294,12 +294,15 @@ $( "#submit-button" ).click(function() {
 
 function showData(){
     $('#data').show();
+    $('#required-time').show();
     var dataDiv = document.getElementById("safest-route-data");
     dataDiv.innerHTML = crimesPerRoad.safest;
     var dataDiv = document.getElementById("fastest-route-data");
     dataDiv.innerHTML = crimesPerRoad.fastest;
     var dataDiv = document.getElementById("dangerous-route-data");
     dataDiv.innerHTML = crimesPerRoad.dangerous;
+    var timeDiv = document.getElementById("insert-time");
+    timeDiv.innerHTML = 'Approximate time: ' + approximateTime;
 }
 
 //Checkbox change event
