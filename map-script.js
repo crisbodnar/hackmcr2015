@@ -48,7 +48,7 @@
           });
           ourMarker.addListener('click', toggleBounce);
         }
-        setTimeout(doGeolocation, 3000);
+        setTimeout(doGeolocation, 1000);
       });
     }
     function initMap() {
