@@ -13,3 +13,10 @@ Mikhail:
 Jeff: 
 - front end html css
 - clock work api
+
+
+How to make the project in steps : 
+1 .
+- show the map
+- begining and destination
+- how safe you are at the moment
