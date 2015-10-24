@@ -80,7 +80,7 @@
                   var midpoints = functionToGetMidpoints(coordinates);
                   arrayOfRoutes[i] = midpoints;
                 }
-                getSafestRoute(arrayOfRoutes, Route['dataMonths'], function(ways){
+                getSafestRoute(arrayOfRoutes, (Route['dataMonths']?Route['dataMonths']:1), function(ways){
                   console.log(ways);
                   directionsDisplay.setDirections(result);
                   directionsDisplay.setOptions({routeIndex:ways.safest});
