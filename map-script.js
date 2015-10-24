@@ -6,7 +6,9 @@
     var latitude, longitude;
     var ourGoogle;
 
-    var directionsDisplay;
+    var directionsDisplay;//safest
+    var directionsDisplayDangerous;
+    var directionsDisplayFastest;
     var directionsService;
     var directionsMap;
     // getLocation();
@@ -30,6 +32,8 @@
     function initMap() {
         console.log("Display map");
         directionsDisplay = new google.maps.DirectionsRenderer();
+        directionsDisplayDangerous = new google.maps.DirectionsRenderer();
+        directionsDisplayFastest = new google.maps.DirectionsRenderer();
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: latitude, lng: longitude},
@@ -37,6 +41,8 @@
             zoom: 12
         });
         directionsDisplay.setMap(map);
+        directionsDisplayFastest.setMap(map);
+        directionsDisplayDangerous.setMap(map);
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map,
@@ -67,10 +73,18 @@
                   var midpoints = functionToGetMidpoints(coordinates);
                   arrayOfRoutes[i] = midpoints;
                 }
-                getSafestRoute(arrayOfRoutes,1,function(routeNumber){
-                  console.log(routeNumber);
+                getSafestRoute(arrayOfRoutes,1,function(ways){
+                  console.log(ways);
                   directionsDisplay.setDirections(result);
-                  directionsDisplay.setOptions({routeIndex:routeNumber});
+                  directionsDisplay.setOptions({routeIndex:ways.safest});
+                  directionsDisplayDangerous.setDirections(result);
+                  directionsDisplayDangerous.setOptions({routeIndex:ways.dangerous});
+                  var travelTimes = [];
+                  for (var i = 0; i < routes.length; i++){
+                    travelTimes[i] = routes[i].legs[0].duration.value;
+                  }
+                  directionsDisplayFastest.setDirections(result);
+                  directionsDisplayFastest.setOptions({routeIndex:min(travelTimes)});
                 })
             }
         });
