@@ -8,6 +8,11 @@
 //   console.log(data);
 // });
 
+var crimesPerRoad = {
+  safest:0,
+  dangerous:0,
+  fastest:0
+};
 var crimesNumbers = [];
 var approximateTime = 0;
 

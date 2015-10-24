@@ -3,7 +3,7 @@
  */
     var latitude, longitude;
     var ourGoogle;
-	var marker
+	var ourMarker;
     var directionsDisplay;//safest
     var directionsDisplayDangerous;
     var directionsDisplayFastest;
@@ -42,19 +42,21 @@
         directionsDisplay.setMap(map);
         directionsDisplayFastest.setMap(map);
         directionsDisplayDangerous.setMap(map);
-        marker = new google.maps.Marker({
+		var image = 'MapMarkerIcon.png';
+        ourMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map,
 			animation: google.maps.Animation.DROP,
+			icon: image,
             title: 'You are here!!!'
         });
-		marker.addListener('click', toggleBounce);
+		ourMarker.addListener('click', toggleBounce);
     }
 	function toggleBounce() {
-		if (marker.getAnimation() !== null) {
-			marker.setAnimation(null);
+		if (ourMarker.getAnimation() !== null) {
+			ourMarker.setAnimation(null);
 		} else {
-			marker.setAnimation(google.maps.Animation.BOUNCE);
+			ourMarker.setAnimation(google.maps.Animation.BOUNCE);
 		}
 	}
     function calcRoute(Route) {
@@ -89,10 +91,16 @@
                   var travelTimes = [];
                   for (var i = 0; i < routes.length; i++){
                     travelTimes[i] = routes[i].legs[0].duration.value;
+                    approximateTime += travelTimes[i];
                   }
-                  approximateTime = formatTime((travelTimes[0] + travelTimes[1] + travelTimes[2])/3);
+                  approximateTime /= routes.length;
+                  console.log(travelTimes);
+                  approximateTime = formatTime(approximateTime);
                   directionsDisplayFastest.setDirections(result);
                   directionsDisplayFastest.setOptions({routeIndex:min(travelTimes)});
+                  crimesPerRoad.safest = Math.round(crimesNumbers[ways.safest]);
+                  crimesPerRoad.dangerous = Math.round(crimesNumbers[ways.dangerous]);
+                  crimesPerRoad.fastest = Math.round(crimesNumbers[min(travelTimes)]);
                 })
             }
         });
