@@ -1,0 +1,15 @@
+Tasks : 
+
+Kasper: 
+- algorithm for the best road
+
+Cristi: 
+- google maps api
+- figure out how to get waypoints
+
+Mikhail: 
+- police api
+
+Jeff: 
+- front end html css
+- clock work api
