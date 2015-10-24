@@ -56,6 +56,7 @@
         directionsService.route(request, function(result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 var routes = result.routes;
+                var arrayOfRoutes = [];
                 for(var i = 0; i < routes.length; i++){
                   var steps = routes[i].legs[0].steps;
                   var coordinates = [];
@@ -64,8 +65,13 @@
                     coordinates[j+1] = [steps[j].end_location.lat(),steps[j].end_location.lng()]
                   }
                   var midpoints = functionToGetMidpoints(coordinates);
-                  console.log(midpoints);
+                  arrayOfRoutes[i] = midpoints;
                 }
+                getSafestRoute(arrayOfRoutes,1,function(routeNumber){
+                  console.log(routeNumber);
+                  directionsDisplay.setDirections(result);
+                  directionsDisplay.setOptions({routeIndex:routeNumber});
+                })
             }
         });
     }
