@@ -11,6 +11,16 @@
 var crimesNumbers = [];
 var approximateTime = 0;
 
+function formatTime(time){
+  var formatedTime;
+  var minutes = time/60;
+  var hours = Math.floor(minutes/60);
+  minutes -= hours*60;
+  minutes = Math.round(minutes);
+  return (hours>0?hours+"+h+":"")+minutes+"+min";
+}
+
+
 function getSafestRoute(array,months,callback)
 {
   var resultArray = [];
