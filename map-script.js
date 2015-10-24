@@ -55,7 +55,17 @@
         };
         directionsService.route(request, function(result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(result);
+                var routes = result.routes;
+                for(var i = 0; i < routes.length; i++){
+                  var steps = routes[i].legs[0].steps;
+                  var coordinates = [];
+                  coordinates[0] = [steps[0].start_location.lat(),steps[0].start_location.lng()];
+                  for (var j = 0; j < steps.length; j++){
+                    coordinates[j+1] = [steps[j].end_location.lat(),steps[j].end_location.lng()]
+                  }
+                  var midpoints = functionToGetMidpoints(coordinates);
+                  console.log(midpoints);
+                }
             }
         });
     }
