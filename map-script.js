@@ -30,8 +30,8 @@
     }
     function initMap() {
         console.log("Display map");
-        directionsDisplay = new google.maps.DirectionsRenderer();
-        directionsDisplayDangerous = new google.maps.DirectionsRenderer();
+        directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } });
+        directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } });
         directionsDisplayFastest = new google.maps.DirectionsRenderer();
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
