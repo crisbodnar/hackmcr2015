@@ -42,10 +42,12 @@
         directionsDisplay.setMap(map);
         directionsDisplayFastest.setMap(map);
         directionsDisplayDangerous.setMap(map);
+		var image = 'MapMarkerIcon.png';
         ourMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map,
 			animation: google.maps.Animation.DROP,
+			icon: image,
             title: 'You are here!!!'
         });
 		ourMarker.addListener('click', toggleBounce);
