@@ -31,7 +31,7 @@
         directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } });
         directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } });
         directionsDisplayFastest = new google.maps.DirectionsRenderer();
-        
+
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: latitude, lng: longitude},
@@ -90,7 +90,7 @@
                   for (var i = 0; i < routes.length; i++){
                     travelTimes[i] = routes[i].legs[0].duration.value;
                   }
-                  approximateTime = Math.round((travelTimes[0] + travelTimes[1] + travelTimes[2])/3/60);
+                  approximateTime = formatTime((travelTimes[0] + travelTimes[1] + travelTimes[2])/3);
                   directionsDisplayFastest.setDirections(result);
                   directionsDisplayFastest.setOptions({routeIndex:min(travelTimes)});
                 })
@@ -128,5 +128,3 @@ $('#current-location-checkbox').change(function() {
 $( document ).ready(function() {
   getLocation();
 });
-
-
