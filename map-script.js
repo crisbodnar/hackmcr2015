@@ -42,10 +42,12 @@
         directionsDisplay.setMap(map);
         directionsDisplayFastest.setMap(map);
         directionsDisplayDangerous.setMap(map);
+		var image = 'MapMarkerIcon.png';
         ourMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map,
 			animation: google.maps.Animation.DROP,
+			icon: image,
             title: 'You are here!!!'
         });
 		ourMarker.addListener('click', toggleBounce);
@@ -89,8 +91,11 @@
                   var travelTimes = [];
                   for (var i = 0; i < routes.length; i++){
                     travelTimes[i] = routes[i].legs[0].duration.value;
+                    approximateTime += travelTimes[i];
                   }
-                  approximateTime = formatTime((travelTimes[0] + travelTimes[1] + travelTimes[2])/3);
+                  approximateTime /= routes.length;
+                  console.log(travelTimes);
+                  approximateTime = formatTime(approximateTime);
                   directionsDisplayFastest.setDirections(result);
                   directionsDisplayFastest.setOptions({routeIndex:min(travelTimes)});
                   crimesPerRoad.safest = Math.round(crimesNumbers[ways.safest]);
