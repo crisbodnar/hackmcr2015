@@ -6,7 +6,7 @@
 	width: 100%;
 }
 
-.container pre{
-	display: block;
-}
 
+.coordinates {
+	color: red;
+}
