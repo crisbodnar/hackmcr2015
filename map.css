@@ -99,6 +99,11 @@ h1{
 	text-transform: uppercase;
 }
 
+#data{
+	clear: both;
+	display: none;
+}
+
 input[type="submit"]:hover{
 	background-color: #4cae4c;
     -webkit-transition: background-color 500ms linear;
@@ -106,4 +111,30 @@ input[type="submit"]:hover{
     -o-transition: background-color 500ms linear;
     -ms-transition: background-color 5000ms linear;
     transition: background-color 500ms linear;
+}
+
+#data div{
+	padding-top: 15px;
+	float: left;
+	text-align: center;
+	vertical-align: middle;
+	width: 33%;
+	height: 25px;
+	font-size: 16px;
+}
+
+#safest-route-data{
+	background: #138b00;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+#fastest-route-data{
+	background: grey;
+}
+
+#dangerous-route-data{
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+	background: #d8001d;
 }

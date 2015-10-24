@@ -9,6 +9,7 @@
     var directionsDisplayFastest;
     var directionsService;
     var directionsMap;
+    var map;
     // getLocation();
     function getLocation() {
         directionsService = new google.maps.DirectionsService();
@@ -26,6 +27,30 @@
         console.log("Works here!");
         initMap();
     }
+    function doGeolocation(){
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var newPoint = new google.maps.LatLng(position.coords.latitude,
+                                              position.coords.longitude);
+        var image = 'MapMarkerIcon.png';
+        if (ourMarker) {
+          // Marker already created - Move it
+          ourMarker.setPosition(newPoint);
+          // console.log("Position chaged");
+        }
+        else {
+          // Marker does not exist - Create it
+          ourMarker = new google.maps.Marker({
+            position: newPoint,
+            map: map,
+            animation: google.maps.Animation.DROP,
+      			icon: image,
+            title: 'You are here!!!'
+          });
+          ourMarker.addListener('click', toggleBounce);
+        }
+        setTimeout(doGeolocation, 3000);
+      });
+    }
     function initMap() {
         console.log("Display map");
         directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } });
@@ -33,7 +58,7 @@
         directionsDisplayFastest = new google.maps.DirectionsRenderer();
 
         // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: latitude, lng: longitude},
             scrollwheel: false,
             zoom: 12
@@ -42,15 +67,15 @@
         directionsDisplay.setMap(map);
         directionsDisplayFastest.setMap(map);
         directionsDisplayDangerous.setMap(map);
-		var image = 'MapMarkerIcon.png';
-        ourMarker = new google.maps.Marker({
+        doGeolocation();
+        /*ourMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map,
 			animation: google.maps.Animation.DROP,
 			icon: image,
             title: 'You are here!!!'
-        });
-		ourMarker.addListener('click', toggleBounce);
+        });*/
+
     }
 	function toggleBounce() {
 		if (ourMarker.getAnimation() !== null) {
@@ -101,6 +126,7 @@
                   crimesPerRoad.safest = Math.round(crimesNumbers[ways.safest]);
                   crimesPerRoad.dangerous = Math.round(crimesNumbers[ways.dangerous]);
                   crimesPerRoad.fastest = Math.round(crimesNumbers[min(travelTimes)]);
+                  showData();
                 })
             }
         });
@@ -120,6 +146,16 @@ $( "#submit-button" ).click(function() {
     console.log(RouteArray["startPoint"]);
     calcRoute(RouteArray);
 });
+
+function showData(){
+    $('#data').show();
+    var dataDiv = document.getElementById("safest-route-data");
+    dataDiv.innerHTML = crimesPerRoad.safest;
+    var dataDiv = document.getElementById("fastest-route-data");
+    dataDiv.innerHTML = crimesPerRoad.fastest;
+    var dataDiv = document.getElementById("dangerous-route-data");
+    dataDiv.innerHTML = crimesPerRoad.dangerous;
+}
 
 //Checkbox change event
 $('#current-location-checkbox').change(function() {
