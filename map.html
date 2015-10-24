@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
-		  integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
-		  crossorigin="anonymous">
-	<link rel="stylesheet" href="maps-api.css">
+	<link rel="stylesheet" type="text/css" href="map.css">
 </head>
 <body>
-	<div class= "container">
-		<br> <br>
-		<pre>		
-			<input type="checkbox" id="current-location-checkbox" name="usehere"> <em>Check this box if the address is here</em>
+		<aside id="menu">
+			<div id="menu-container">
+			<h1>Safe Travel</h1>
+    		
+    		<div>
+    			<label for="current-location-checkbox">Use my current location</label>
+    			<input type="checkbox" id="current-location-checkbox" value=""> 
+    			<input type="text" id="start-location" placeholder="Starting location">
+    			<input type="text" id="end-location" placeholder="Ending location">
+    			<input type="text" id="nrmonths" placeholder="Data - Number of months">
 
-			<span id="starting-text">Starting location</span>  <input title="text" id = "start-location" class="startinglocation">
+    			<input type= "submit" id="submit-button">
+    		</div>
 
-
-		<span>Destination</span>  <input title="text" id="end-location" class="destination">
-
-		How many months to check for crimes <input title="text" id="nrmonths" class="howmany">
-
-		<input type= "submit" id="submit-button">
-
-		Phone number to send tracking data : <input title="text" id="number-input" class= "number">
-
+    		<div>
+    			<input type="text" id="number-input" placeholder="Phone number">
+	   	        <input type="submit" value="SEND SMS" id="sms-button" />
+    		</div>
+    		</div>
+		</aside>
 		
-	   	<input type="submit" value="SEND SMS" id="sms-button" />
-		</pre>
-	</div>
-	<div class= "jumbotron">
-		<h1> Long/lat for current location: </h1>
-    	<div id="coordinates"></div>
-    </div> 
-    	<div class = "jumbotron" id="map"></div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="FunctionOfMidpoints.js"></script>
-		<script src="police.js"></script>
-		<script src="map-script.js"></script>
-		<script src="sendsms.js"></script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjKhNNY3LsJTVCFD2J7UrGtSQyIN4r5k&callback=getLocation"></script>
+		<div id="map"></div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="FunctionOfMidpoints.js"></script>
+	<script src="police.js"></script>
+	<script src="sendsms.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjKhNNY3LsJTVCFD2J7UrGtSQyIN4r5k"></script>
+	<script src="map-script.js"></script>
 </body>
 </html>

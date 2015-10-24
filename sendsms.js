@@ -17,6 +17,7 @@ $( "#sms-button" ).click(function() {
 								+"+to+"+document.getElementById("end-location").value+".+See you soon, hopefully!+I+will+be+there+in+about+"+approximateTime
 								+"+min.+If+I+am+not,+I+am+probably+raped,+robed,+killed+or+who+knows+what+else";
 	console.log(message);
+  window.alert("An SMS has been sent to your mobile phone number!");
 
   sendsms(document.getElementById("number-input").value,message);
 });

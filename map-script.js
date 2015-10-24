@@ -1,7 +1,6 @@
 /**
  * Created by Cristi on 24-Oct-15.
  */
-    var x = document.getElementById("coordinates");
     var latitude, longitude;
     var ourGoogle;
 
@@ -17,14 +16,13 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
     function showPosition(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-        x.innerHTML = "Latitude: " + latitude +
-            "<br>Longitude: " + longitude;
+        //x.innerHTML = "Latitude: " + latitude +
+        //  "<br>Longitude: " + longitude;
         console.log("Works here!");
         initMap();
     }
@@ -33,12 +31,14 @@
         directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } });
         directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } });
         directionsDisplayFastest = new google.maps.DirectionsRenderer();
+        
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: latitude, lng: longitude},
             scrollwheel: false,
             zoom: 12
         });
+        google.maps.event.trigger(map, 'resize');
         directionsDisplay.setMap(map);
         directionsDisplayFastest.setMap(map);
         directionsDisplayDangerous.setMap(map);
@@ -116,3 +116,9 @@ $('#current-location-checkbox').change(function() {
         $('#starting-text').show();
     }
 });
+
+$( document ).ready(function() {
+  getLocation();
+});
+
+
