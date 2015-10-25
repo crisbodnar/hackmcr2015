@@ -4,6 +4,8 @@
     var latitude, longitude;
     var ourGoogle;
 	var ourMarker;
+	var startMarker;
+	var finishMarker;
     var streetHistMarker,streetHistWindow;
     var directionsDisplay;//safest
     var directionsDisplayDangerous;
@@ -309,8 +311,32 @@
         directionsService.route(request, function(result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 var routes = result.routes;
-				makeMarker( routes[0].legs[0].start_location, icons.start, "Starting locaton" );
-				makeMarker( routes[0].legs[0].end_location, icons.end, 'Final destination' );
+				if(startMarker){
+					startMarker.position = routes[0].legs[0].start_location;
+					startMarker.setMap(map);
+				}
+				else {
+					startMarker = new google.maps.Marker({
+						position: routes[0].legs[0].start_location,
+						map: map,
+						icon: icons.start,
+						animation: google.maps.Animation.DROP,
+						title: "Starting locaton"
+					});
+				}
+				if(finishMarker){
+					finishMarker.position = routes[0].legs[0].end_location;
+					finishMarker.setMap(map);
+				}
+				else {
+					finishMarker = new google.maps.Marker({
+						position: routes[0].legs[0].end_location,
+						map: map,
+						icon: icons.end,
+						animation: google.maps.Animation.DROP,
+						title: 'Final destination'
+					});
+				}
                 var arrayOfRoutes = [];
                 for(var i = 0; i < routes.length; i++){
                   var steps = routes[i].legs[0].steps;
@@ -329,6 +355,7 @@
                   directionsDisplayDangerous.setDirections(result);
                   directionsDisplayDangerous.setOptions({routeIndex:ways.dangerous});
                   var travelTimes = [];
+                  approximateTime = 0;
                   for (var i = 0; i < routes.length; i++){
                     travelTimes[i] = routes[i].legs[0].duration.value;
                     approximateTime += travelTimes[i];
@@ -346,15 +373,6 @@
             }
         });
     }
-	function makeMarker( position, icon, title ) {
-		new google.maps.Marker({
-			position: position,
-			map: map,
-			icon: icon,
-			animation: google.maps.Animation.DROP,
-			title: title
-		});
-	}
 
 
 //Submit button event
