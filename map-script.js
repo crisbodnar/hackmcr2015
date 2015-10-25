@@ -365,9 +365,9 @@
                   approximateTime = formatTime(approximateTime);
                   directionsDisplayFastest.setDirections(result);
                   directionsDisplayFastest.setOptions({routeIndex:min(travelTimes)});
-                  crimesPerRoad.safest = Math.round(crimesNumbers[ways.safest]);
-                  crimesPerRoad.dangerous = Math.round(crimesNumbers[ways.dangerous]);
-                  crimesPerRoad.fastest = Math.round(crimesNumbers[min(travelTimes)]);
+                  crimesPerRoad.safest = crimesNumbers[ways.safest].toFixed(2);
+                  crimesPerRoad.dangerous = crimesNumbers[ways.dangerous].toFixed(2);
+                  crimesPerRoad.fastest = crimesNumbers[min(travelTimes)].toFixed(2);
                   showData();
                 })
             }
