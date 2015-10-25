@@ -56,9 +56,9 @@
     }
     function initMap() {
         console.log("Display map");
-        directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } ,suppressMarkers: true});
-        directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } ,suppressMarkers: true});
-        directionsDisplayFastest = new google.maps.DirectionsRenderer({suppressMarkers: true});
+        directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: {strokeOpacity : 0.8, strokeColor: "#138b00" , strokeWeight : 10} ,suppressMarkers: true});
+        directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: {strokeOpacity : 0.4, strokeColor: "#d8001d" , strokeWeight : 10} ,suppressMarkers: true});
+        directionsDisplayFastest = new google.maps.DirectionsRenderer({polylineOptions: { strokeOpacity : 1, strokeWeight : 5}, suppressMarkers: true});
 	    icons = {
 			start: new google.maps.MarkerImage(
 				// URL
