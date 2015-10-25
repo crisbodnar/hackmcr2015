@@ -302,6 +302,8 @@ function showData(){
     var dataDiv = document.getElementById("dangerous-route-data");
     dataDiv.innerHTML = crimesPerRoad.dangerous;
     var timeDiv = document.getElementById("insert-time");
+
+
     timeDiv.innerHTML = 'Approximate time: ' + approximateTime;
 }
 
