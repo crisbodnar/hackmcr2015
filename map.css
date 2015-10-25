@@ -56,6 +56,10 @@ html, body {
 	height: 100%;
 }
 
+#nrmonths {
+	display: none;
+}
+
 #menu-container{
 	width: 90%;
 	margin: 0 auto;
