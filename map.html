@@ -8,21 +8,23 @@
 		<aside id="menu">
 			<div id="menu-container">
 				<h1>Safe Travel</h1>
-	    		
+
 	    		<div>
 	    			<label for="current-location-checkbox">Use my current location</label>
-	    			<input type="checkbox" id="current-location-checkbox" value=""> 
+	    			<input type="checkbox" id="current-location-checkbox" value="">
 	    			<input type="text" id="start-location" placeholder="Starting location">
 	    			<input type="text" id="end-location" placeholder="Ending location">
 	    			<input type="text" id="nrmonths" placeholder="Data - Number of months">
 
 	    			<input type= "submit" id="submit-button" value="SUBMIT">
+						<input type= "submit" id="load-button" value="LOAD ROUTE">
+						<input type= "submit" id="save-button" value="SAVE ROUTE">
 	    		</div>
 
 	    		<div>
 	    			<input type="text" id="number-input" placeholder="Phone number">
 		   	        <input type="submit" value="SEND SMS" id="sms-button" />
-		   	        
+
 		   	        <input type="text" id="number-input2" placeholder="Phone number">
 		   	        <input type="submit" value="SEND PICKUPLINE" id="sms-button2" />
 	    		</div>
@@ -39,9 +41,9 @@
 	    		</div>
     		</div>
 		</aside>
-		
+
 		<div id="map"></div>
-	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="FunctionOfMidpoints.js"></script>
 	<script src="police.js"></script>
@@ -49,5 +51,6 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgjKhNNY3LsJTVCFD2J7UrGtSQyIN4r5k"></script>
 	<script src="map-script.js"></script>
 	<script src="pickup.js"></script>
+	<script src="cookies_handler.js"></script>
 </body>
 </html>
