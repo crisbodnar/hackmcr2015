@@ -1,6 +1,7 @@
 function sendsms(number,message) {
 //message = "hell";
 key = '6575b7a0c97c835c2125b5a59d4ad50da6f665d5';
+
 $.ajax({
 		url:  'https://api.clockworksms.com/http/send.aspx',
         data  : 'key='+ key + "&to=" + number + "&content="+ message,
@@ -20,4 +21,12 @@ $( "#sms-button" ).click(function() {
   window.alert("An SMS has been sent to your mobile phone number!");
 
   sendsms(document.getElementById("number-input").value,message);
+})
+  $( "#sms-button2" ).click(function() {
+    pickuplines = ["yes", "no", "home"];
+  var message = pickuplines[Math.floor(Math.random()*pickuplines.length)];
+  console.log(message);
+  window.alert("An SMS has been sent to your mobile phone number!");
+
+  sendsms(document.getElementById("number-input2").value,message);
 });
