@@ -329,6 +329,7 @@
                   directionsDisplayDangerous.setDirections(result);
                   directionsDisplayDangerous.setOptions({routeIndex:ways.dangerous});
                   var travelTimes = [];
+                  approximateTime = 0;
                   for (var i = 0; i < routes.length; i++){
                     travelTimes[i] = routes[i].legs[0].duration.value;
                     approximateTime += travelTimes[i];
