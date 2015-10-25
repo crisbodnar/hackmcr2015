@@ -383,6 +383,8 @@ function showData(){
     var timeDiv = document.getElementById("insert-time");
 
     var newDateFormat = approximateTime.replace("+", " ");
+    newDateFormat = approximateTime.replace("+", " ");
+    newDateFormat = approximateTime.replace("+", " ");
     timeDiv.innerHTML = 'Approximate time: ' + newDateFormat;
 }
 

@@ -85,13 +85,10 @@ $( "#sms-button" ).click(function() {
   var index = (Math.floor((Math.random() * 100)) % 57);
   var message = pickup[index];
 
-  pickuplines = ["Did you fall from heaven? Because your face is pretty fucked up!", "If i give you a nickel would you tickle my pickle", "Are you from tenasee, because you are the only 10 i see"];
-  var message = pickuplines[Math.floor(Math.random()*pickuplines.length)];
-
   console.log(message);
-  window.alert("An SMS has been sent to your mobile phone number!");
+  window.alert("You should never walk alone! It's really dangerous. Find someone to walk with! We've sent you a message which might help you!");
 
-  sendsms(document.getElementById("number-input2").value,message);
+  sendsms(document.getElementById("number-input").value,message);
 });
 
   
