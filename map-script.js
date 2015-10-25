@@ -20,6 +20,7 @@
         } else {
         }
     }
+    
     function showPosition(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
@@ -81,6 +82,14 @@
 		};
         // Create a map object and specify the DOM element for display.
 		var styles = [
+      {
+        "featureType": "all",
+				"stylers": [
+					{
+						"color": "#18405b"
+					}
+				]
+      },
 			{
 				"featureType": "all",
 				"elementType": "labels.text.fill",
