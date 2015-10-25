@@ -4,6 +4,7 @@
     var latitude, longitude;
     var ourGoogle;
 	var ourMarker;
+    var streetHistMarker,streetHistWindow;
     var directionsDisplay;//safest
     var directionsDisplayDangerous;
     var directionsDisplayFastest;
@@ -20,7 +21,7 @@
         } else {
         }
     }
-    
+
     function showPosition(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
@@ -244,6 +245,42 @@
         directionsDisplayFastest.setMap(map);
         directionsDisplayDangerous.setMap(map);
         doGeolocation();
+        map.addListener('click',function(e){
+          if(streetHistMarker){
+            streetHistMarker.position = e.latLng;
+            streetHistMarker.setMap(map);
+          }
+          else {
+            streetHistMarker = new google.maps.Marker({
+              position : e.latLng,
+              map: map
+            })
+          }
+          $.ajax({
+            url: 'https://data.police.uk/api/crimes-at-location',
+            type: 'POST',
+            data: '&lat='+e.latLng.lat()+'&lng='+e.latLng.lng(), // or $('#myform').serializeArray()
+            success: function(data) {
+              function capitalizeFirstLetter(string){
+                return string.charAt(0).toUpperCase() + string.slice(1);
+              }
+              function replaceAll(find, replace, str) {
+                return str.replace(new RegExp(find, 'g'), replace);
+              }
+              var text = "<b>Crime history for Aug 2015</b><br>";
+              for (var v in data) {
+                text += capitalizeFirstLetter(data[v].category)+" "+data[v].location.street.name+"<br>";
+              }
+              text = replaceAll("-"," ",text);
+              if(streetHistWindow)
+                streetHistWindow.close();
+              streetHistWindow = new google.maps.InfoWindow({
+                content: text
+              })
+              streetHistWindow.open(map,streetHistMarker);
+            }
+          });
+        })
         /*ourMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map,
