@@ -60,6 +60,14 @@
 
         // Create a map object and specify the DOM element for display.
 		var styles = [
+      {
+        "featureType": "all",
+				"stylers": [
+					{
+						"color": "#18405b"
+					}
+				]
+      },
 			{
 				"featureType": "all",
 				"elementType": "labels.text.fill",
@@ -295,12 +303,15 @@ $( "#submit-button" ).click(function() {
 
 function showData(){
     $('#data').show();
+    $('#required-time').show();
     var dataDiv = document.getElementById("safest-route-data");
     dataDiv.innerHTML = crimesPerRoad.safest;
     var dataDiv = document.getElementById("fastest-route-data");
     dataDiv.innerHTML = crimesPerRoad.fastest;
     var dataDiv = document.getElementById("dangerous-route-data");
     dataDiv.innerHTML = crimesPerRoad.dangerous;
+    var timeDiv = document.getElementById("insert-time");
+    timeDiv.innerHTML = 'Approximate time: ' + approximateTime;
 }
 
 //Checkbox change event
