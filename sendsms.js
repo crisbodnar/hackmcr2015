@@ -23,10 +23,10 @@ $( "#sms-button" ).click(function() {
   sendsms(document.getElementById("number-input").value,message);
 })
   $( "#sms-button2" ).click(function() {
-    pickuplines = ["Did you fall from heaven? Because your face is pretty fucked up!", "If i give you a nickel would you tickle my pickle", "Are you from tenasee, because you are the only 10 i see"];
+  pickuplines = ["Did you fall from heaven? Because your face is pretty fucked up!", "If i give you a nickel would you tickle my pickle", "Are you from tenasee, because you are the only 10 i see"];
   var message = pickuplines[Math.floor(Math.random()*pickuplines.length)];
   console.log(message);
   window.alert("An SMS has been sent to your mobile phone number!");
 
   sendsms(document.getElementById("number-input2").value,message);
-});
+});// 07733645724
