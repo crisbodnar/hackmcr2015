@@ -21,10 +21,11 @@ html,body {
   padding:0;
   height: 60px;
   position: relative;
+  margin-top: 0px;
 
 }
 
-.jumbotron {
+html {
   background-image:url('background.jpg');
   height: 900px;
   background-repeat: no-repeat;
@@ -44,6 +45,10 @@ html,body {
   width: 1200px;
   font-family: sans-serif;
   text-align: center;
+}
+
+.nav ul {
+  margin-top:0;
 }
 
 .nav li:hover {

@@ -10,6 +10,7 @@
     var directionsService;
     var directionsMap;
     var map;
+	var icons;
     // getLocation();
     function getLocation() {
         directionsService = new google.maps.DirectionsService();
@@ -19,6 +20,7 @@
         } else {
         }
     }
+    
     function showPosition(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
@@ -53,12 +55,41 @@
     }
     function initMap() {
         console.log("Display map");
-        directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00", thickness: 50 } });
-        directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } });
-        directionsDisplayFastest = new google.maps.DirectionsRenderer();
-
+        directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#138b00" } ,suppressMarkers: true});
+        directionsDisplayDangerous = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#d8001d" } ,suppressMarkers: true});
+        directionsDisplayFastest = new google.maps.DirectionsRenderer({suppressMarkers: true});
+	    icons = {
+			start: new google.maps.MarkerImage(
+				// URL
+				'startMarker.png',
+				// (width,height)
+				new google.maps.Size( 45, 45 ),
+				// The origin point (x,y)
+				new google.maps.Point( 0, 0 ),
+				// The anchor point (x,y)
+				new google.maps.Point( 5, 45 )
+			),
+			end: new google.maps.MarkerImage(
+				// URL
+				'finishMarker.png',
+				// (width,height)
+				new google.maps.Size( 45, 45 ),
+				// The origin point (x,y)
+				new google.maps.Point( 0, 0 ),
+				// The anchor point (x,y)
+				new google.maps.Point( 5, 45 )
+			)
+		};
         // Create a map object and specify the DOM element for display.
 		var styles = [
+      {
+        "featureType": "all",
+				"stylers": [
+					{
+						"color": "#18405b"
+					}
+				]
+      },
 			{
 				"featureType": "all",
 				"elementType": "labels.text.fill",
@@ -241,6 +272,8 @@
         directionsService.route(request, function(result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 var routes = result.routes;
+				makeMarker( routes[0].legs[0].start_location, icons.start, "Starting locaton" );
+				makeMarker( routes[0].legs[0].end_location, icons.end, 'Final destination' );
                 var arrayOfRoutes = [];
                 for(var i = 0; i < routes.length; i++){
                   var steps = routes[i].legs[0].steps;
@@ -276,6 +309,15 @@
             }
         });
     }
+	function makeMarker( position, icon, title ) {
+		new google.maps.Marker({
+			position: position,
+			map: map,
+			icon: icon,
+			animation: google.maps.Animation.DROP,
+			title: title
+		});
+	}
 
 
 //Submit button event
