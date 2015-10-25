@@ -25,12 +25,18 @@ $( "#sms-button" ).click(function() {
   sendsms(document.getElementById("number-input").value,message);
 })
   $( "#sms-button2" ).click(function() {
+<<<<<<< HEAD
   var index = (Math.floor((Math.random() * 100)) % 57);
   var message = pickup[index];
+=======
+  pickuplines = ["Did you fall from heaven? Because your face is pretty fucked up!", "If i give you a nickel would you tickle my pickle", "Are you from tenasee, because you are the only 10 i see"];
+  var message = pickuplines[Math.floor(Math.random()*pickuplines.length)];
+>>>>>>> b8308daa65873bdaccff18310a3644a1f1825ec0
   console.log(message);
   window.alert("An SMS has been sent to your mobile phone number!");
 
   sendsms(document.getElementById("number-input2").value,message);
+<<<<<<< HEAD
 });
 
   var pickup = ["Are you a magician? Because whenever I look at you, everyone else disappears!" ,
@@ -90,3 +96,6 @@ $( "#sms-button" ).click(function() {
 "I was wondering if you had an extra heart mine seems to have been stolen" ,
 "I will stop loving you when an apple grows from a mango tree on the 30th of February." ,
 "I'm fighting the urge to make you the happiest woman on earth tonight."];
+=======
+});// 07733645724
+>>>>>>> b8308daa65873bdaccff18310a3644a1f1825ec0
