@@ -7,19 +7,27 @@ html,body {
   color: #5a5a5a;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 30px;
   text-decoration: none;
   position: relative;
 
 
 }
 
+.textfrom p{
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 50px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+}
 
 
 .nav {
 	color: transparent;
   padding:0;
-  height: 60px;
+  height: 70px;
   position: relative;
   margin-top: 0px;
 
@@ -27,7 +35,6 @@ html,body {
 
 html {
   background-image:url('background.jpg');
-  height: 900px;
   background-repeat: no-repeat;
   background-size: cover;
   padding:0;
@@ -44,6 +51,7 @@ html {
   padding-top: 20px;
   width: 1200px;
   font-family: sans-serif;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   text-align: center;
 }
 
