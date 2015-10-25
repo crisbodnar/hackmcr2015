@@ -382,8 +382,8 @@ function showData(){
     dataDiv.innerHTML = crimesPerRoad.dangerous;
     var timeDiv = document.getElementById("insert-time");
 
-
-    timeDiv.innerHTML = 'Approximate time: ' + approximateTime;
+    var newDateFormat = approximateTime.replace("+", " ");
+    timeDiv.innerHTML = 'Approximate time: ' + newDateFormat;
 }
 
 //Checkbox change event
